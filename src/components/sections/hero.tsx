@@ -72,9 +72,9 @@ export function Hero() {
             <figcaption className="flex items-start gap-2 border-t border-olive/15 bg-paper/60 px-6 py-4 text-xs leading-relaxed text-ink-soft">
               <Icon name="sparkle" className="mt-0.5 h-3.5 w-3.5 flex-none text-mustard" />
               <span>
-                Ilustración de tinta roja inspirada en la identidad ilustrada de
-                La Taberna (artista original del menú: &ldquo;miguel brossa&rdquo;).
-                Reemplazar por la obra real y fotografías de la casona.
+                Ilustración de la identidad ilustrada de La Taberna, en el
+                espíritu del artista del menú. Las fotografías reales de la
+                casona se integran al confirmar el proyecto.
               </span>
             </figcaption>
           </div>

@@ -49,8 +49,9 @@ export function Story() {
               <figcaption className="flex items-start gap-2 border-t border-olive/10 bg-paper/60 px-5 py-4 text-xs leading-relaxed text-ink-soft">
                 <Icon name="sparkle" className="mt-0.5 h-3.5 w-3.5 flex-none text-mustard" />
                 <span>
-                  [Foto] Vista del salón de la casona: vigas, entrepiso y
-                  ambiente. Reemplazar por fotografía real de la casa.
+                  Vista del salón de la casona: vigas, entrepiso y ambiente.
+                  Las fotografías reales de la casa se integran al confirmar
+                  el proyecto.
                 </span>
               </figcaption>
             </div>
