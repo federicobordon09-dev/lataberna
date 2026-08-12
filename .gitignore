@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# skills y vendor de terceros
+.opencode/
+
+# material de investigación / dossier
+research/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

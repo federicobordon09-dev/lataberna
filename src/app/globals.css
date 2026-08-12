@@ -1,26 +1,199 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #f2e9d8;
+  --color-paper-light: #faf5e9;
+  --color-paper-deep: #e8dcc2;
+  --color-ink: #241b12;
+  --color-ink-soft: #6a5a44;
+  --color-wine: #9b1b30;
+  --color-wine-deep: #7e1325;
+  --color-bermellon: #c0392b;
+  --color-mustard: #d4a017;
+  --color-olive: #6b7a3f;
+  --color-cream: #faf5e9;
+
+  --tracking-eyebrow: 0.22em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* un sutil "granulado de papel" */
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgb(155 27 48 / 0.05), transparent 60%),
+      radial-gradient(900px 500px at 0% 110%, rgb(107 122 63 / 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: var(--color-wine);
+    color: var(--color-paper-light);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-wine);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-eyebrow);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-wine);
+  }
+
+  .eyebrow::before {
+    content: "";
+    height: 1px;
+    width: 2rem;
+    background-color: var(--color-mustard);
+  }
+
+  .hairline {
+    border-color: rgb(107 122 63 / 0.22);
+  }
+
+  /* revelado suave al hacer scroll (respetando reduced-motion) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* punto guía del menú */
+  .price-dots {
+    border-bottom: 1px dotted var(--color-ink-soft);
+    opacity: 0.55;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-wine {
+    background-color: var(--color-wine);
+    color: var(--color-paper-light);
+    box-shadow: 0 1px 2px rgb(126 19 37 / 0.25);
+  }
+
+  .btn-wine:hover {
+    background-color: var(--color-wine-deep);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgb(155 27 48 / 0.4);
+    color: var(--color-wine);
+  }
+
+  .btn-ghost:hover {
+    background-color: rgb(155 27 48 / 0.06);
+  }
+
+  .btn-cream {
+    background-color: var(--color-paper-light);
+    color: var(--color-wine);
+  }
+
+  .btn-cream:hover {
+    background-color: #ffffff;
+  }
+
+  /* flotación muy lenta de la ilustración de autor (solo decorativa) */
+  .float-slow {
+    animation: float-slow 9s ease-in-out infinite;
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* ocultar la barra de scroll en el carrusel de categorías */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendors y skills instaladas de terceros:
+    ".opencode/**",
+    "research/**",
+    "node_modules/**",
   ]),
 ]);
 
