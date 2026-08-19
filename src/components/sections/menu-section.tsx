@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaLink } from "@/components/ui/cta-link";
@@ -13,6 +13,24 @@ import { links } from "@/lib/site";
 export function MenuSection() {
   const [activeId, setActiveId] = useState(menu[0].id);
   const active = menu.find((c) => c.id === activeId) ?? menu[0];
+  const tablistRef = useRef<HTMLDivElement | null>(null);
+
+  function onTabListKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const buttons = Array.from(
+      tablistRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? [],
+    );
+    const idx = buttons.findIndex((b) => b.id === `tab-${activeId}`);
+    let next = -1;
+    if (e.key === "ArrowRight") next = (idx + 1) % buttons.length;
+    else if (e.key === "ArrowLeft") next = (idx - 1 + buttons.length) % buttons.length;
+    else if (e.key === "Home") next = 0;
+    else if (e.key === "End") next = buttons.length - 1;
+    if (next < 0) return;
+    e.preventDefault();
+    const target = menu[next];
+    setActiveId(target.id);
+    buttons[next]?.focus();
+  }
 
   return (
     <section id="carta" className="scroll-mt-24 border-y hairline bg-paper-light/70 py-20 md:py-28">
@@ -32,8 +50,11 @@ export function MenuSection() {
 
         <Reveal delay={100}>
           <div
+            ref={tablistRef}
             role="tablist"
             aria-label="Categorías de la carta"
+            aria-orientation="horizontal"
+            onKeyDown={onTabListKeyDown}
             className="no-scrollbar mt-12 flex gap-2 overflow-x-auto pb-2 sm:justify-center"
           >
             {menu.map((category) => {
@@ -43,6 +64,7 @@ export function MenuSection() {
                   key={category.id}
                   role="tab"
                   id={`tab-${category.id}`}
+                  tabIndex={selected ? 0 : -1}
                   aria-selected={selected}
                   aria-controls={`panel-${category.id}`}
                   onClick={() => setActiveId(category.id)}
@@ -71,18 +93,17 @@ export function MenuSection() {
             </p>
 
             <div className="mt-10 space-y-12">
-              {active.groups
-                .filter((g) => g.items.length > 0)
-                .map((group) => (
-                  <div key={group.title ?? group.note}>
-                    {group.title ? (
-                      <h3 className="mb-5 flex items-center gap-4 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-wine">
-                        <span className="h-px flex-1 bg-olive/25" />
-                        {group.title}
-                        <span className="h-px flex-1 bg-olive/25" />
-                      </h3>
-                    ) : null}
+              {active.groups.map((group) => (
+                <div key={group.title ?? group.note}>
+                  {group.title ? (
+                    <h3 className="mb-5 flex items-center gap-4 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-wine">
+                      <span className="h-px flex-1 bg-olive/25" />
+                      {group.title}
+                      <span className="h-px flex-1 bg-olive/25" />
+                    </h3>
+                  ) : null}
 
+                  {group.items.length > 0 ? (
                     <ul className="grid gap-x-10 gap-y-4 md:grid-cols-2">
                       {group.items.map((item) => (
                         <li
@@ -106,14 +127,15 @@ export function MenuSection() {
                         </li>
                       ))}
                     </ul>
+                  ) : null}
 
-                    {group.note && !group.title ? (
-                      <p className="mt-4 text-sm italic text-ink-soft">
-                        {group.note}
-                      </p>
-                    ) : null}
-                  </div>
-                ))}
+                  {group.note ? (
+                    <p className="mt-4 text-sm italic text-ink-soft">
+                      {group.note}
+                    </p>
+                  ) : null}
+                </div>
+              ))}
             </div>
 
             {active.highlight ? (

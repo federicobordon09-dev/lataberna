@@ -34,7 +34,6 @@
     background-image:
       radial-gradient(1200px 600px at 80% -10%, rgb(155 27 48 / 0.05), transparent 60%),
       radial-gradient(900px 500px at 0% 110%, rgb(107 122 63 / 0.06), transparent 60%);
-    background-attachment: fixed;
   }
 
   ::selection {
@@ -113,6 +112,15 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* si el JS no carga o está deshabilitado, el contenido nunca se oculta */
+  @media (scripting: none) {
     .reveal {
       opacity: 1;
       transform: none;

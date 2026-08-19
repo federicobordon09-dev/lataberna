@@ -65,7 +65,7 @@ export function Hero() {
         </div>
 
         <Reveal delay={160} className="relative">
-          <div className="relative overflow-hidden rounded-[2rem] border border-olive/20 bg-paper-light shadow-[0_30px_60px_-30px_rgba(36,27,18,0.35)]">
+          <figure className="relative overflow-hidden rounded-[2rem] border border-olive/20 bg-paper-light shadow-[0_30px_60px_-30px_rgba(36,27,18,0.35)]">
             <div className="float-slow mx-auto max-w-md p-10 text-wine sm:p-14">
               <BrossaMark className="h-auto w-full" />
             </div>
@@ -77,7 +77,7 @@ export function Hero() {
                 casona se integran al confirmar el proyecto.
               </span>
             </figcaption>
-          </div>
+          </figure>
         </Reveal>
       </Container>
     </section>

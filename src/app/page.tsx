@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main" tabIndex={-1} className="scroll-mt-24 outline-none">
         <Hero />
         <SocialProof />
         <Story />

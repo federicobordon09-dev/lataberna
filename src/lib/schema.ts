@@ -1,4 +1,4 @@
-import { site, links } from "./site";
+import { site, links, openingHours } from "./site";
 import { menu, type MenuItem } from "./menu";
 
 const schemaPrice = (item: MenuItem) =>
@@ -53,21 +53,12 @@ export const restaurantSchema = {
     links.rappi,
     links.tripadvisor,
   ],
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "11:45",
-      closes: "15:30",
-    },
-  ],
+  openingHoursSpecification: openingHours.map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.dayOfWeek,
+    opens: h.opens,
+    closes: h.closes,
+  })),
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: site.ratings.tripadvisor.value,

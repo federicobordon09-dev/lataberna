@@ -54,7 +54,7 @@ export const menu: MenuCategory[] = [
         ],
       },
       {
-        note: "Panera de fogatas $11.800 · Cubierto $4.600",
+        note: "Panera de fogliatas $11.800 · Cubierto $4.600",
         items: [],
       },
     ],

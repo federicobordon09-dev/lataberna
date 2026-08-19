@@ -23,8 +23,8 @@
  * ═══════════════════════════════════════════════════════════════
  */
 
-// Identidad, contacto, dirección, ratings, links y navegación
-export { site, links, mapEmbedUrl, nav } from "./site";
+// Identidad, contacto, dirección, ratings, links, horarios y navegación
+export { site, links, mapEmbedUrl, nav, schedule, openingHours } from "./site";
 
 // Carta completa por categorías (tipos incluidos)
 export { menu, menuFooterNote } from "./menu";

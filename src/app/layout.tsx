@@ -83,11 +83,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${fraunces.variable} ${workSans.variable} antialiased`}
     >
       <head>
-        <link rel="canonical" href={site.url} />
         <link rel="manifest" href="/site.webmanifest" />
         <JsonLd />
       </head>
-      <body className="flex min-h-svh flex-col">{children}</body>
+      <body className="flex min-h-svh flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-wine focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-paper-light"
+        >
+          Saltar al contenido
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

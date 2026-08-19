@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaLink } from "@/components/ui/cta-link";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { Reveal } from "@/components/ui/reveal";
-import { site, links, mapEmbedUrl } from "@/lib/site";
+import { site, links, mapEmbedUrl, schedule } from "@/lib/site";
 
 const channels: {
   icon: IconName;
@@ -48,13 +48,6 @@ const channels: {
 function mapLink() {
   return "https://www.google.com/maps/search/La+Taberna+Ramon+Falcon+146+Lomas+de+Zamora";
 }
-
-const schedule = [
-  { day: "Martes a viernes", time: "12:00 – 15:30", source: "mediodía · menú ejecutivo" },
-  { day: "Sábados y domingos", time: "12:00 – 16:00", source: "mediodía" },
-  { day: "Martes a viernes", time: "20:00 – 00:00", source: "cena" },
-  { day: "Sábados y domingos", time: "20:00 – 01:00", source: "cena" },
-];
 
 export function Visit() {
   return (
@@ -111,7 +104,7 @@ export function Visit() {
               </h3>
               <dl className="mt-4 space-y-3 text-sm">
                 {schedule.map((s) => (
-                  <div key={s.day} className="flex items-start justify-between gap-4 border-b border-dashed border-olive/25 pb-3 last:border-0 last:pb-0">
+                  <div key={s.id} className="flex items-start justify-between gap-4 border-b border-dashed border-olive/25 pb-3 last:border-0 last:pb-0">
                     <dt className="font-medium text-ink">{s.day}</dt>
                     <dd className="text-right">
                       <span className="block text-ink">{s.time}</span>

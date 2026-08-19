@@ -42,7 +42,7 @@ export function Story() {
                 </>
               }
             />
-            <div className="mt-8 overflow-hidden rounded-3xl border border-olive/15 bg-paper-deep">
+            <figure className="mt-8 overflow-hidden rounded-3xl border border-olive/15 bg-paper-deep">
               <div className="grid h-64 place-items-center bg-[radial-gradient(circle_at_center,rgba(155,27,48,0.12),transparent_70%)]">
                 <Icon name="mansion" className="h-16 w-16 text-wine/70" />
               </div>
@@ -54,7 +54,7 @@ export function Story() {
                   el proyecto.
                 </span>
               </figcaption>
-            </div>
+            </figure>
           </Reveal>
         </div>
 

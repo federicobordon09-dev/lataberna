@@ -4,7 +4,10 @@ export const site = {
   tagline: "Cocina italiana de autor, hecha en casa",
   claim:
     "Cocina italiana de autor, hecha en casa, en el corazón de Lomas de Zamora desde hace más de 20 años.",
-  url: "https://latabernalomas.com.ar",
+  // TODO: reemplazar por el dominio final "https://latabernalomas.com.ar"
+  // cuando esté activo. Mientras tanto se usa la URL de la demo en Vercel
+  // para que canonical, sitemap, robots y og:image sean válidos.
+  url: "https://lataberna-six.vercel.app",
   description:
     "Cocina italiana de autor hecha en casa en Lomas de Zamora. Pastas con sémola y huevo, mariscos, carnes y helados artesanales por kilo. Reservá tu mesa en Ramón Falcón 146.",
   servedCuisine: ["Italiana", "Europea"],
@@ -41,6 +44,23 @@ export const site = {
 
   finalCta: "La mesa no espera, se llena.",
 } as const;
+
+// Horarios publicados en la landing (único punto de referencia). Alineados
+// con local.md §6: mediodía y cena, con días de semana y fin de semana.
+export const schedule = [
+  { id: "lunch-week", day: "Martes a viernes", time: "12:00 – 15:30", source: "mediodía · menú ejecutivo" },
+  { id: "lunch-weekend", day: "Sábados y domingos", time: "12:00 – 16:00", source: "mediodía" },
+  { id: "dinner-week", day: "Martes a viernes", time: "20:00 – 00:00", source: "cena" },
+  { id: "dinner-weekend", day: "Sábados y domingos", time: "20:00 – 01:00", source: "cena" },
+] as const;
+
+// Misma información en formato Schema.org para el JSON-LD (openingHoursSpecification).
+export const openingHours = [
+  { dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"], opens: "12:00", closes: "15:30" },
+  { dayOfWeek: ["Saturday", "Sunday"], opens: "12:00", closes: "16:00" },
+  { dayOfWeek: ["Tuesday", "Wednesday", "Thursday", "Friday"], opens: "20:00", closes: "00:00" },
+  { dayOfWeek: ["Saturday", "Sunday"], opens: "20:00", closes: "01:00" },
+] as const;
 
 export const links = {
   reservas:
